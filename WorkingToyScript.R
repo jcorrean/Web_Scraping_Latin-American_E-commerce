@@ -1,3 +1,4 @@
+setwd("/home/juan/Documents/")
 library(rvest)
 
 countryNames <- c("Argentina")
