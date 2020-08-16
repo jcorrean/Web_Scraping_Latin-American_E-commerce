@@ -1,9 +1,8 @@
-setwd("/home/juan/Documents/")
 library(rvest)
 
-countryNames <- c("Argentina")
+countryNames <- c("Argentina","Bolivia")
 
-countryEnd <- c("ar")
+countryEnd <- c("ar","bo")
 
 productList <- c("Iphone 7","PS4","Converse","Biblia")
 
@@ -52,7 +51,7 @@ for(a in 1:length(countryEnd) ){
         }
         
       )
-      
+    
       
       if (flag0!="a"){ 
         web <-read_html(completeurl)
@@ -65,7 +64,7 @@ for(a in 1:length(countryEnd) ){
         sold <- html_text(sold_html)
         urlList<-web %>% html_nodes(".item__info-title") %>% html_attr('href')
         print(completeurl)
-        
+       
         vectorproducts <-c(vectorproducts,products)
         vectorprice<-c(vectorprice,price)
         vectorsold<-c(vectorsold,sold)
@@ -149,22 +148,6 @@ for(a in 1:length(countryEnd) ){
             switch (countryEnd[a],
                     ar = {newurl<-paste0("https://articulo.mercadolibre.com.ar",w)},
                     bo = {newurl<-paste0("https://articulo.mercadolibre.com.bo",w)},
-                    br = {newurl<-paste0("https://produto.mercadolivre.com.br",w)},
-                    cl = {newurl<-paste0("https://articulo.mercadolibre.cl",w)},
-                    co = {newurl<-paste0("https://articulo.mercadolibre.com.co",w)},
-                    cr = {newurl<-paste0("https://articulo.mercadolibre.co.cr",w)},
-                    do = {newurl<-paste0("https://articulo.mercadolibre.com.do",w)},
-                    ec = {newurl<-paste0("https://articulo.mercadolibre.com.ec",w)},
-                    gt = {newurl<-paste0("https://articulo.mercadolibre.com.gt",w)},
-                    hn = {newurl<-paste0("https://articulo.mercadolibre.com.hn",w)},
-                    mx = {newurl<-paste0("https://articulo.mercadolibre.com.mx",w)},
-                    ni = {newurl<-paste0("https://articulo.mercadolibre.com.ni",w)},
-                    pa = {newurl<-paste0("https://articulo.mercadolibre.com.pa",w)},
-                    py = {newurl<-paste0("https://articulo.mercadolibre.com.py",w)},
-                    pe = {newurl<-paste0("https://articulo.mercadolibre.com.pe",w)},
-                    sv = {newurl<-paste0("https://articulo.mercadolibre.com.sv",w)},
-                    uy = {newurl<-paste0("https://articulo.mercadolibre.com.uy",w)},
-                    ve = {newurl<-paste0("https://articulo.mercadolibre.com.ve",w)}
             )
             
             print(newurl)
