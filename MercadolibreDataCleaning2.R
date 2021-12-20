@@ -1,4 +1,4 @@
-load("~/Documents/DataMercadolibre.RData")
+load("DataMercadolibre.RData")
 mercadolibredata <- data.frame(dataset[2:11])
 
 #mercadolibredata$vectorprice <- as.numeric(mercadolibredata$vectorprice)
@@ -37,7 +37,7 @@ newdata <- mutate(newdata, trust = PF / (PF + NeuF + NF))
 rm(list=setdiff(ls(), "newdata"))
 
 library(ggridges)
-Fig1 <- ggplot(newdata, aes(x=newdata$trust, y=as.factor(newdata$Country))) + geom_density_ridges(fill="green", alpha = 0.4) + ylab("Country") + xlab("Trust") + theme(axis.text.y = element_text(family="Arial", face="bold", colour="black", size=rel(4))) + theme(axis.text.x = element_text(family="Arial", face="bold", colour="black", size=rel(2)))
+Fig1 <- ggplot(newdata, aes(x=newdata$trust, y=as.factor(newdata$Country))) + geom_density_ridges(fill="green", alpha = 0.4) + ylab("Country") + xlab("Trust") + theme(axis.text.y = element_text(family="Arial", face="bold", colour="black", size=rel(3))) + theme(axis.text.x = element_text(family="Arial", face="bold", colour="black", size=rel(2)))
 
 library(psych)
 countries <- describeBy(newdata$trust, group = newdata$Country, mat = TRUE)
