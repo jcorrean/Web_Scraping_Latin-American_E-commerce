@@ -37,14 +37,14 @@ newdata <- mutate(newdata, trust = PF / (PF + NeuF + NF))
 rm(list=setdiff(ls(), "newdata"))
 
 library(ggridges)
-Fig1 <- ggplot(newdata, aes(x=newdata$trust, y=as.factor(newdata$Country))) + geom_density_ridges(fill="green", alpha = 0.4) + ylab("Country") + xlab("Trust") + theme(axis.text.y = element_text(family="Arial", face="bold", colour="black", size=rel(3))) + theme(axis.text.x = element_text(family="Arial", face="bold", colour="black", size=rel(2)))
+Fig1 <- ggplot(newdata, aes(x=newdata$trust, y=as.factor(newdata$Country))) + geom_density_ridges(fill="blue", alpha = 0.4) + ylab("Country") + xlab("Vendors' Reputation") + theme(axis.text.y = element_text(family="Arial", face="bold", colour="black")) + theme(axis.text.x = element_text(family="Arial", face="bold", colour="black", size=rel(0.2)))
 
 library(psych)
 countries <- describeBy(newdata$trust, group = newdata$Country, mat = TRUE)
 
 library(ggrepel)
 row.names(countries) <- countries$group1
-Fig2 <- ggplot(countries, aes(x=mean, y=sd)) + geom_point() + geom_smooth() + geom_text_repel(label = rownames(countries)) + xlab("Average Trust Score") + ylab("Standard Deviation of Trust Score")
+Fig2 <- ggplot(countries, aes(x=mean, y=sd)) + geom_point() + geom_smooth() + geom_text_repel(label = rownames(countries)) + xlab("Average of Vendors' Reputation") + ylab("Standard Deviation of Vendors' Reputation")
 
 library(ggpubr)
 
