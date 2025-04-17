@@ -36,3 +36,12 @@ newdata <- mutate(newdata, trust = PF / (PF + NeuF + NF))
 newdata$trustsq <- newdata$trust^2
 
 rm(list=setdiff(ls(), "newdata"))
+
+library(MASS) #  Keep it here in case you want to do overdispersion checks later
+
+# Model 1 (Table 2 - Model 1)
+M1 <- glm(SI ~ trust + trustsq,
+              data = newdata, family = "poisson")
+
+# Display the results
+summary(M1)
