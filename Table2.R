@@ -42,6 +42,55 @@ library(MASS) #  Keep it here in case you want to do overdispersion checks later
 # Model 1 (Table 2 - Model 1)
 M1 <- glm(SI ~ trust + trustsq,
               data = newdata, family = "poisson")
-
-# Display the results
 summary(M1)
+
+M2 <- glm(SI ~ trust + trustsq + history,
+          data = newdata, family = "poisson")
+summary(M2)
+
+M3 <- glm(SI ~ trust + trustsq + history + log(price),
+          data = newdata, family = "poisson")
+summary(M3)
+
+M4 <- glm(SI ~ trust + history + log(price) + PI,
+          data = newdata, family = "poisson")
+summary(M4)
+
+M5 <- glm(SI ~ trust + trustsq + history + log(price) + PI,
+          data = newdata, family = "poisson")
+summary(M5)
+
+M6 <- glm(SI ~ 0 + trust + trustsq + history + log(price) + PI, #  Notice the 0 +
+          data = newdata, family = "poisson")
+summary(M6)
+
+library(stargazer)
+stargazer(M1, M2, M3, M4, M5, M6,
+          title = "Table 2: Regression Results",
+          dep.var.labels = "Sales (SI)",
+          covariate.labels = c("Trust", "Trustsq", "history", "log(Price)", "PI"),
+          #omit.stat = c("all.chi2", "aic", "lr"), #  Optional: Omit statistics you don't want
+          type = "text")
+
+
+
+M2 <- glm(SI ~ trust + I(trust^2) + history,
+          data = newdata, family = "poisson")
+summary(M2)
+
+M3 <- glm(SI ~ trust + I(trust^2) + history + log(price),
+          data = newdata, family = "poisson")
+summary(M3)
+
+M4 <- glm(SI ~ trust + history + log(price) + PI,
+          data = newdata, family = "poisson")
+summary(M4)
+
+M5 <- glm(SI ~ trust + I(trust^2) + history + log(price) + PI,
+          data = newdata, family = "poisson")
+summary(M5)
+
+M6A <- glm(SI ~ trust + I(trust^2) + history + log(price) + PI - 1, # Explicitly removing the intercept
+          data = newdata, family = "poisson")
+summary(M6A)
+summary(M6)
