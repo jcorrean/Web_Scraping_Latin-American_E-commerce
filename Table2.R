@@ -64,6 +64,16 @@ M6 <- glm(SI ~ 0 + trust + trustsq + history + log(price) + PI, #  Notice the 0 
           data = newdata, family = "poisson")
 summary(M6)
 
+library(margins)
+marginal_effects_M6 <- margins(M6)
+summary(marginal_effects_M6)
+
+# Si deseas una tabla formateada de los efectos marginales
+library(broom)
+tidy_margins_M6 <- tidy(marginal_effects_M6)
+print(tidy_margins_M6)
+
+
 library(stargazer)
 stargazer(M1, M2, M3, M4, M5, M6,
           title = "Table 2: Regression Results",
